@@ -11,7 +11,7 @@ app = FastAPI()
 def root():
     return "Message api running!"
 
-@app.post("/sendMessage/")
+@app.post("/sendMessage/dialog")
 async def send_message():
     api=DialogApi()
     response=api.message()
