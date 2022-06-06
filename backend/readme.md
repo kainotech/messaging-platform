@@ -5,3 +5,6 @@
  
  ## Service
   uvicorn main:app --reload
+
+## Strramlit Ui
+  streamlit run app.py
