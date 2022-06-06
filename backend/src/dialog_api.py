@@ -72,7 +72,7 @@ class DialogApi():
             )
 
         if response.status_code==200:
-            return json.loads(response.text)
+            return response.text
 
 
     def message(self):
