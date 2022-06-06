@@ -1,3 +1,4 @@
+from email import message
 import os
 import json
 import requests
@@ -36,15 +37,14 @@ class DialogApi():
 
         return new_id
 
-    def _make_body_params_message(self) -> dict:
+    def _make_body_params_message(self,message) -> dict:
         _body = {
                     "sourceAddress": "kainovation",
-                    "message": "test message from the sms api by kainovation",
+                    "message": message,
                     "transaction_id": self.get_transaction_id(),
                     "msisdn": [
-                        {
-                            "mobile": "0701613315"
-                        }
+                        {"mobile": "0701613315"},
+                        # {"mobile":"0741878798"}
                     ]
                 }
         return _body
@@ -57,7 +57,7 @@ class DialogApi():
         if response.status_code==200:
             return json.loads(response.text)["token"]
         
-    def sending_message(self,token):
+    def sending_message(self,token,message):
         self.BASE_URL = "https://e-sms.dialog.lk/api/v1/sms"
 
         self.session = requests.Session()
@@ -66,7 +66,7 @@ class DialogApi():
             "content-type": "application/json"
         }
         self.session.headers.update(self.req_headers)
-        self.req_body = self._make_body_params_message()
+        self.req_body = self._make_body_params_message(message)
         response = self.session.post(
                 self.BASE_URL, json=self.req_body, verify=True, allow_redirects=False
             )
@@ -75,7 +75,7 @@ class DialogApi():
             return response.text
 
 
-    def message(self):
+    def message(self,message:str):
         token = self.get_token()
-        res=self.sending_message(token)
+        res=self.sending_message(token,message)
         return res
