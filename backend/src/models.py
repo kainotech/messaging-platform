@@ -7,3 +7,8 @@ class Platform(str, Enum):
     dialog = "dialog"
     mobitel = "mobitel"
     whatsapp = "whatsapp"
+
+
+class dialog_message(BaseModel):
+    message: str="Test SMS(Dialog) by Kainovation"
+
