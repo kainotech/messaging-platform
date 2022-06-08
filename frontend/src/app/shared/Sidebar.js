@@ -227,31 +227,27 @@ class Sidebar extends Component {
             </Collapse>
           </li>
           <li className="nav-item nav-category">
-            <span className="nav-link"><Trans>More</Trans></span>
+            <span className="nav-link"><Trans>Developer</Trans></span>
           </li>
-          <li className={ this.isPathActive('/error-pages') ? 'nav-item menu-items active' : 'nav-item menu-items' }>
-            <div className={ this.state.errorPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('errorPagesMenuOpen') } data-toggle="collapse">
+          
+          <li className="nav-item menu-items">
+            <a className="nav-link" href="http://bootstrapdash.com/demo/corona-react-free/documentation/documentation.html" rel="noopener noreferrer" target="_blank">
               <span className="menu-icon">
-                <i className="mdi mdi-lock"></i>
+                <i className="mdi mdi-api"></i>
               </span>
-              <span className="menu-title"><Trans>Error Pages</Trans></span>
-              <i className="menu-arrow"></i>
-            </div>
-            <Collapse in={ this.state.errorPagesMenuOpen }>
-              <div>
-                <ul className="nav flex-column sub-menu">
-                  <li className="nav-item"> <Link className={ this.isPathActive('/error-pages/error-404') ? 'nav-link active' : 'nav-link' } to="/error-pages/error-404">404</Link></li>
-                  <li className="nav-item"> <Link className={ this.isPathActive('/error-pages/error-500') ? 'nav-link active' : 'nav-link' } to="/error-pages/error-500">500</Link></li>
-                </ul>
-              </div>
-            </Collapse>
+              <span className="menu-title"><Trans>SMS API</Trans></span>
+            </a>
           </li>
+          <li className="nav-item nav-category">
+            <span className="nav-link"><Trans>Help</Trans></span>
+          </li>
+          
           <li className="nav-item menu-items">
             <a className="nav-link" href="http://bootstrapdash.com/demo/corona-react-free/documentation/documentation.html" rel="noopener noreferrer" target="_blank">
               <span className="menu-icon">
                 <i className="mdi mdi-file-document-box"></i>
               </span>
-              <span className="menu-title"><Trans>Documentation</Trans></span>
+              <span className="menu-title"><Trans>User Guides</Trans></span>
             </a>
           </li>
         </ul>
