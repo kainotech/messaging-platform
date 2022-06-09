@@ -14,7 +14,7 @@ BASE_URL = "https://yrj1e9.api.infobip.com"
 API_KEY = "App c494da16ef5f1b481e3ffd994bfcd8fe-7d3eeaa8-9aa9-4741-8109-d24694ecf1f6"
 
 SENDER = "447860099299"
-RECIPIENT = "94741878798"
+RECIPIENT = "94701613315"
 
 payload = {
     "messages":
