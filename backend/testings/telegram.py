@@ -7,13 +7,13 @@ from telethon import TelegramClient, sync, events
 
 # get your api_id, api_hash, token
 # from telegram as described above
-api_id = 'API_id'
-api_hash = 'API_hash'
-token = 'bot token'
+api_id = "16614431"
+api_hash = "48f640ce7e1dc5b434d2f382dddac989"
+token = '5558778607:AAHmlg5wTq8YJ1y8PDEiAeA_QNxjkEAWZnY'
 message = "Working..."
 
 # your phone number
-phone = 'YOUR_PHONE_NUMBER_WTH_COUNTRY_CODE'
+phone = "94701613315"
 
 # creating a telegram session and assigning
 # it to a variable client
@@ -44,7 +44,7 @@ except Exception as e:
 	
 	# there may be many error coming in while like peer
 	# error, wrong access_hash, flood_error, etc
-	print(e);
+	print(e)
 
 # disconnecting the telegram session
 client.disconnect()

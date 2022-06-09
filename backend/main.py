@@ -15,10 +15,11 @@ def root():
     return "Message api running!"
 
 @app.post("/sendMessageDialog/")
-async def send_message(mesage:str="Test SMS(Dialog) by Kainovation"):
+async def send_message(message:str):
     api=DialogApi()
-    response=api.message(message=mesage)
+    response=api.message(message=message)
     print(response)
+    return response
 
 @app.post("/sendWAMessage/")
 async def send_wa_message():
