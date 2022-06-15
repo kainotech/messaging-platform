@@ -27,6 +27,10 @@ async def send_wa_message():
     res=wa_api.message()
     print(res)
 
+@app.post("/sendTelMessage/")
+async def send_tel_message():
+    return "telegram"
+
 
 
 if __name__ == "__main__":

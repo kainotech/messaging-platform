@@ -8,6 +8,6 @@ bot_token = '5471537894:AAGQe_UHJNHqP_6UsZcGp5Ndt0DAgwbAQAE'
 # bot.send_message(0000000,"hii")
 
 bot=telepot.Bot(bot_token)
-bot.sendMessage(1090822693,"Hi_there")
+bot.sendMessage(1090822693,"Hi there\nthis is test message")
 
 # https://api.telegram.org/bot5471537894:AAGQe_UHJNHqP_6UsZcGp5Ndt0DAgwbAQAE/getUpdates
