@@ -9,7 +9,7 @@ from telethon import TelegramClient, sync, events
 # from telegram as described above
 api_id = "16614431"
 api_hash = "48f640ce7e1dc5b434d2f382dddac989"
-token = '5558778607:AAHmlg5wTq8YJ1y8PDEiAeA_QNxjkEAWZnY'
+token = '5471537894:AAGQe_UHJNHqP_6UsZcGp5Ndt0DAgwbAQAE'
 message = "Working..."
 
 # your phone number
