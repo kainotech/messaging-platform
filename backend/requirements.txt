@@ -1,5 +1,7 @@
 altair==4.2.0
 anyio==3.6.1
+appdirs==1.4.4
+APScheduler==3.6.3
 argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
 asgiref==3.5.2
@@ -9,7 +11,7 @@ backcall==0.2.0
 beautifulsoup4==4.11.1
 bleach==5.0.0
 blinker==1.4
-cachetools==5.2.0
+cachetools==4.2.2
 certifi==2022.5.18.1
 cffi==1.15.0
 charset-normalizer==2.0.12
@@ -72,6 +74,7 @@ Pympler==1.0.1
 pyparsing==3.0.9
 pyrsistent==0.18.1
 python-dateutil==2.8.2
+python-telegram-bot==13.12
 pytz==2022.1
 pytz-deprecation-shim==0.1.0.post0
 pywin32==304
@@ -90,6 +93,8 @@ stack-data==0.2.0
 starlette==0.19.1
 streamlit==1.10.0
 telebot==0.0.4
+telegram==0.0.1
+telegram-send==0.34
 Telethon==1.24.0
 terminado==0.15.0
 tinycss2==1.1.1
