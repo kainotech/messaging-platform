@@ -3,6 +3,7 @@ import re
 from fastapi import FastAPI
 from src.dialog_api import DialogApi
 from src.whatsapp_api import WhatsappApi
+from src.telegram_api import TelegramApi
 from src.models import Platform,dialog_message
 import uvicorn
 
@@ -25,11 +26,13 @@ async def send_message(message:str):
 async def send_wa_message():
     wa_api=WhatsappApi()
     res=wa_api.message()
-    print(res)
+    return res
 
 @app.post("/sendTelMessage/")
 async def send_tel_message():
-    return "telegram"
+    tel_api=TelegramApi()
+    res=tel_api.message("Test Message")
+    return res
 
 
 
