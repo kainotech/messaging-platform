@@ -34,6 +34,10 @@ async def send_tel_message():
     res=tel_api.message("Test Message")
     return res
 
+@app.post("/sendViberMessage/")
+async def viber_message():
+    return "ok"
+
 
 
 if __name__ == "__main__":
