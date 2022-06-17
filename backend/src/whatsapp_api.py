@@ -13,7 +13,7 @@ class WhatsappApi():
         self.session = requests.Session()
         self.req_headers = {
             "content-type": "application/json",
-            "Authorization":"Bearer EAAGpo6XqllQBAOZCm5fvUjU4VclRXniQZAdjhojxJj2NnBjFqq7kf8WblH62L99veW1uY44TyZCxdmvO4hFb7RBtIfDTmdAzE28vGzz1JZAZCol1Lm9OFp1txmwYChGjx5Lc35dJWZCTbdUuwsOYiOGTfWgH6GuWtYyjSgAPvpEJETKGikLSLeZApX0AEiHxAdvmbw8KqFmBwZDZD"
+            "Authorization":"Bearer EAAGpo6XqllQBANjZCtHzOFdwBc0LJqxMGKuYV1Owl2pVS0ZC4HaZBmumyK3JVAyIiwLa3ZCYdZBTshlPZArIZAsdtEYMrOZAdvpMsTpYSCANS7iOdqupBw6cONZBZBorLFNK51zBZAfx4no0zzlhZAahSSofrJ50JQeiVCZBhx0y3m9yunroFeRGExn45",
         }
         self.session.headers.update(self.req_headers)
         self.req_body = self._make_body_params()        
