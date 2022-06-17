@@ -14,9 +14,9 @@ print(viber)
 account_info = viber.get_account_info()
 print(account_info)
 
-print(viber.name)
+print(viber)
 
-# event_types = viber.set_webhook('"http://127.0.0.1:8000/incomeViber/"')
+event_types = viber.set_webhook('https://webhook.site/adfd9aa5-202a-47cd-8fab-9d28ae2f4a94')
 
 # tokens = viber.send_messages(to="v0VTGJ1gxendIFHjWx4oZQ==",messages=[TextMessage(text="sample message")])
 
