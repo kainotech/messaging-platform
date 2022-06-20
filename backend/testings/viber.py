@@ -43,15 +43,15 @@ print("\nresponse\n"+r.text)
 url='https://chatapi.viber.com/pa/send_message'
 
 data ={
-		"receiver":"94701613315",
+		"receiver":"v0VTGJ1gxendIFHjWx4oZQ==",
 		"min_api_version":1,
 		"sender":{
-			"name":"John McClane",
-			"avatar":"http://avatar.example.com"
+			"name":"Saranga Bakery",
+			"avatar":"https://dl-media.viber.com/1/share/2/long/vibes/icon/image/0x0/0607/50bcec73dcd00b7612fbe9d12f5ba644421e1493f2f02bde7323f71ef9c70607.jpg"
 		},
 		"tracking_data":"tracking data",
 		"type":"text",
-		"text":"Hello world!"
+		"text":"Testing Message By Kainovation"
 		}
 
 r = requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json',"X-Viber-Auth-Token":"4f5acb4ff627e040-a7062fd70d670f24-df614826fe3944f"})
