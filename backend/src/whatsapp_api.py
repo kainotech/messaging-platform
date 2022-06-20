@@ -13,7 +13,7 @@ class WhatsappApi():
         self.session = requests.Session()
         self.req_headers = {
             "content-type": "application/json",
-            "Authorization":"Bearer EAAGpo6XqllQBANjZCtHzOFdwBc0LJqxMGKuYV1Owl2pVS0ZC4HaZBmumyK3JVAyIiwLa3ZCYdZBTshlPZArIZAsdtEYMrOZAdvpMsTpYSCANS7iOdqupBw6cONZBZBorLFNK51zBZAfx4no0zzlhZAahSSofrJ50JQeiVCZBhx0y3m9yunroFeRGExn45",
+            "Authorization":"Bearer EAAGpo6XqllQBAJiD1woxLQMpPDLiCMM4SMBMMf8lZCFnhkP71TmwYZC34dcNeIVpussE95V0ZAPJephMCYS2lCC5UnAPtSvbqNmYftKqpWaOg6L43i0rZCiZABTDT1GVKzCmY8ibVYZB6KBOEdOac8yzfNTZBB07NbaJr5w0AoBek7KhIJopQsN",
         }
         self.session.headers.update(self.req_headers)
         self.req_body = self._make_body_params()        
@@ -23,12 +23,9 @@ class WhatsappApi():
         _body = {
                 "messaging_product": "whatsapp",
                 "to": "94701613315",
-                "type": "template",
-                "template": {
-                    "name": "hello_world",
-                    "language": {
-                        "code": "en_US"
-                    }
+                "type": "text",
+                "text": {
+                    "body": "test message by kainovation",
                 }
             }
         return _body
@@ -41,7 +38,7 @@ class WhatsappApi():
             )
 
         if response.status_code==200:
-            return json.loads(response.text)
+            return response.text
         
 
 

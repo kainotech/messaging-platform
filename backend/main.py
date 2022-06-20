@@ -39,6 +39,7 @@ async def send_tel_message():
 async def viber_message():
     viber_api=ViberApi()
     res=viber_api.message()
+    print(res)
     return res
 
 
