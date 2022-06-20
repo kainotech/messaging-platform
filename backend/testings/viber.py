@@ -2,6 +2,8 @@ from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages.text_message import TextMessage
 from viberbot import Api
+import requests
+import json
 
 bot_configuration = BotConfiguration(
 	name='Saranga Bakery',
@@ -16,7 +18,41 @@ print(account_info)
 
 print(viber)
 
-event_types = viber.set_webhook('https://webhook.site/adfd9aa5-202a-47cd-8fab-9d28ae2f4a94')
+url='https://chatapi.viber.com/pa/set_webhook'
 
+data ={
+			"url":"https://webhook.site/adfd9aa5-202a-47cd-8fab-9d28ae2f4a94",
+			"event_types":[
+				"delivered",
+				"seen",
+				"failed",
+				"subscribed",
+				"unsubscribed",
+				"conversation_started"
+			],
+			"send_name": True,
+			"send_photo": True
+			}
+
+r = requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json',"X-Viber-Auth-Token":"4f5acb4ff627e040-a7062fd70d670f24-df614826fe3944f"})
+print("\nresponse\n"+r.text)
 # tokens = viber.send_messages(to="v0VTGJ1gxendIFHjWx4oZQ==",messages=[TextMessage(text="sample message")])
 
+
+
+url='https://chatapi.viber.com/pa/send_message'
+
+data ={
+		"receiver":"94701613315",
+		"min_api_version":1,
+		"sender":{
+			"name":"John McClane",
+			"avatar":"http://avatar.example.com"
+		},
+		"tracking_data":"tracking data",
+		"type":"text",
+		"text":"Hello world!"
+		}
+
+r = requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json',"X-Viber-Auth-Token":"4f5acb4ff627e040-a7062fd70d670f24-df614826fe3944f"})
+print("\nresponse\n"+r.text)
