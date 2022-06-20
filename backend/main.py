@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from src.dialog_api import DialogApi
 from src.whatsapp_api import WhatsappApi
 from src.telegram_api import TelegramApi
+from src.viber_api import ViberApi
 from src.models import Platform,dialog_message
 import uvicorn
 
@@ -36,7 +37,9 @@ async def send_tel_message():
 
 @app.post("/sendViberMessage/")
 async def viber_message():
-    return "ok"
+    viber_api=ViberApi()
+    res=viber_api.message()
+    return res
 
 
 
