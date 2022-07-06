@@ -3,33 +3,46 @@ import json
 import requests
 
 # 94741878798
+# 0705815179
 
 class WhatsappApi():
     class_name = os.path.basename(__file__)
 
-    def __init__(self) -> None:
-        self.BASE_URL = "https://graph.facebook.com/v13.0/102050555869182/messages"
-
+    def __init__(self,business_id:str,number:str) -> None:
+        # self.BASE_URL = "https://graph.facebook.com/v13.0/105726822204079/messages"
+        self.BASE_URL = f"https://graph.facebook.com/v13.0/{business_id}/messages"
         self.session = requests.Session()
         self.req_headers = {
             "content-type": "application/json",
-            "Authorization":"Bearer EAAGpo6XqllQBAJiD1woxLQMpPDLiCMM4SMBMMf8lZCFnhkP71TmwYZC34dcNeIVpussE95V0ZAPJephMCYS2lCC5UnAPtSvbqNmYftKqpWaOg6L43i0rZCiZABTDT1GVKzCmY8ibVYZB6KBOEdOac8yzfNTZBB07NbaJr5w0AoBek7KhIJopQsN",
+            "Authorization":"Bearer EAAGpo6XqllQBABCigcEGvVUamLqBtpxATnTIL0fS3axFGIHKTgJCh0moGZAZCbP0ZB2LIsPZCxHnhJ7Ydl7yRC3ZBmV3oGjWbnAsbTVTNRI5HqYOislS6v2TP7EzosfeZAyRJ1545dsxblQdCu5lySjsW1RkrZCljMCkZAjgRExuqOlvoeqKYcuvxBGWEYN3ZBh1u8HSOqGmjBQZDZD",
         }
         self.session.headers.update(self.req_headers)
-        self.req_body = self._make_body_params()        
+        self.req_body = self._make_body_params(number)        
 
 
-    def _make_body_params(self) -> dict:
+    def _make_body_params(self,number) -> dict:
         _body = {
                 "messaging_product": "whatsapp",
-                "to": "94701613315",
+                "to": number,
                 "type": "template",
-                    "template": {
-                        "name": "hello_world",
-                        "language": {
-                            "code": "en_US"
+                "template": {
+                "name": "sample_shipping_confirmation",
+                "language": {
+                    "code": "en_US",
+                    "policy": "deterministic"
+                },
+                "components": [
+                    {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text",
+                            "text": "2"
                         }
+                    ]
                     }
+                ]
+                }
             }
         return _body
 

@@ -36,8 +36,8 @@ async def send_bulk_dialog(file: UploadFile = File(...),message:str="test messag
 
 #whatsapp message
 @app.post("/sendWAMessage/")
-async def send_wa_message():
-    wa_api=WhatsappApi()
+async def send_wa_message(business_id:str="105726822204079",number:str=""):
+    wa_api=WhatsappApi(business_id,number)
     res=wa_api.message()
     return res
 
