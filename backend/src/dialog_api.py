@@ -46,10 +46,7 @@ class DialogApi():
                     "sourceAddress": "kainovation",
                     "message": message,
                     "transaction_id": self.get_transaction_id(),
-                    "msisdn": [
-                        {"mobile": "0701613315"},
-                        # {"mobile":"0741878798"}
-                    ]
+                    "msisdn": [{"mobile": "0701613315"}]
                 }
         return _body
 

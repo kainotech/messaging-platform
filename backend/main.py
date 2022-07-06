@@ -8,7 +8,6 @@ from src.viber_api import ViberApi
 from src.models import Platform,dialog_message
 from tempfile import NamedTemporaryFile
 import uvicorn
-from src.test import file_process
 import csv
 import os
 
@@ -22,7 +21,7 @@ def root():
 
 #dialog message
 @app.post("/sendMessageDialog/")
-async def send_message(message:str):
+async def send_message(number:str,message:str):
     api=DialogApi()
     response=api.message(message=message)
     print(response)
@@ -58,10 +57,6 @@ async def viber_message():
     return res
 
 
-@app.post("/get_information")
-async def get_information(file: UploadFile = File(...)):
-    return file_process(file)
-    
 
 
 
