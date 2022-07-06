@@ -23,10 +23,13 @@ class WhatsappApi():
         _body = {
                 "messaging_product": "whatsapp",
                 "to": "94701613315",
-                "type": "text",
-                "text": {
-                    "body": "test message by kainovation",
-                }
+                "type": "template",
+                    "template": {
+                        "name": "hello_world",
+                        "language": {
+                            "code": "en_US"
+                        }
+                    }
             }
         return _body
 

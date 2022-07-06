@@ -41,12 +41,12 @@ class DialogApi():
 
         return new_id
 
-    def _make_body_params_message(self,message) -> dict:
+    def _make_body_params_message(self,message,number) -> dict:
         _body = {
                     "sourceAddress": "kainovation",
                     "message": message,
                     "transaction_id": self.get_transaction_id(),
-                    "msisdn": [{"mobile": "0701613315"}]
+                    "msisdn": [{"mobile": number}]
                 }
         return _body
 
@@ -58,7 +58,7 @@ class DialogApi():
         if response.status_code==200:
             return json.loads(response.text)["token"]
         
-    def sending_message(self,token,message):
+    def sending_message(self,token,message,number):
         self.BASE_URL = "https://e-sms.dialog.lk/api/v1/sms"
 
         self.session = requests.Session()
@@ -67,7 +67,7 @@ class DialogApi():
             "content-type": "application/json"
         }
         self.session.headers.update(self.req_headers)
-        self.req_body = self._make_body_params_message(message)
+        self.req_body = self._make_body_params_message(message,number)
         response = self.session.post(
                 self.BASE_URL, json=self.req_body, verify=True, allow_redirects=False
             )
@@ -76,9 +76,9 @@ class DialogApi():
             return response.text
 
 
-    def message(self,message:str):
+    def message(self,message:str,number:str):
         token = self.get_token()
-        res=self.sending_message(token,message)
+        res=self.sending_message(token,message,number)
         return res
 
 

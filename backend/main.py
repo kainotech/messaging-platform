@@ -23,7 +23,7 @@ def root():
 @app.post("/sendMessageDialog/")
 async def send_message(number:str,message:str):
     api=DialogApi()
-    response=api.message(message=message)
+    response=api.message(message=message,number=number)
     print(response)
     return response
 
