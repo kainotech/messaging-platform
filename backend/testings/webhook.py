@@ -50,7 +50,7 @@ def incoming():
 	return Response(status=200)
 
 def set_webhook(viber):
-	viber.set_webhook('https://webhook.site/adfd9aa5-202a-47cd-8fab-9d28ae2f4a94')
+	viber.set_webhook('https://webhook.site/73ba8fe2-52b9-468b-924a-497785a9bc8f')
 
 if __name__ == "__main__":
 	scheduler = sched.scheduler(time.time, time.sleep)

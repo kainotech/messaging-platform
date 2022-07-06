@@ -1,21 +1,26 @@
 from lib2to3.pgen2 import token
 import re
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from src.dialog_api import DialogApi
 from src.whatsapp_api import WhatsappApi
 from src.telegram_api import TelegramApi
 from src.viber_api import ViberApi
 from src.models import Platform,dialog_message
+from tempfile import NamedTemporaryFile
 import uvicorn
+from src.test import file_process
+import csv
+import os
 
 
 app = FastAPI()
 
-
+#root
 @app.get("/")
 def root():
     return "Message api running!"
 
+#dialog message
 @app.post("/sendMessageDialog/")
 async def send_message(message:str):
     api=DialogApi()
@@ -23,24 +28,49 @@ async def send_message(message:str):
     print(response)
     return response
 
+#dialog bulk messages
+@app.post("/sendBulkDialog")
+async def send_bulk_dialog(file: UploadFile = File(...)):
+    return file_process(file)
+
+#whatsapp message
 @app.post("/sendWAMessage/")
 async def send_wa_message():
     wa_api=WhatsappApi()
     res=wa_api.message()
     return res
 
+#telegram bot
 @app.post("/sendTelMessage/")
 async def send_tel_message():
     tel_api=TelegramApi()
     res=tel_api.message("Test Message")
     return res
 
+#viber bot
 @app.post("/sendViberMessage/")
 async def viber_message():
     viber_api=ViberApi()
     res=viber_api.message()
     print(res)
     return res
+
+
+@app.post("/get_information")
+async def get_information(file: UploadFile = File(...)):
+    return file_process(file)
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
