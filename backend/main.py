@@ -2,7 +2,7 @@ from lib2to3.pgen2 import token
 import re
 from fastapi import FastAPI, File, UploadFile
 from src.dialog_api import DialogApi, DialogApiBulk
-from src.whatsapp_api import WhatsappApi
+from src.whatsapp_api import WhatsappApi, WhatsappApiBulk
 from src.telegram_api import TelegramApi
 from src.viber_api import ViberApi
 from src.models import Platform,dialog_message
@@ -35,11 +35,18 @@ async def send_bulk_dialog(file: UploadFile = File(...),message:str="test messag
     return response
 
 #whatsapp message
-@app.post("/sendWAMessage/")
+@app.post("/sendWA/")
 async def send_wa_message(business_id:str="105726822204079",number:str=""):
     wa_api=WhatsappApi(business_id,number)
     res=wa_api.message()
     return res
+
+#whatsapp bulk messages
+@app.post("/sendWAMBulk")
+async def send_bulk_dialog(file: UploadFile = File(...),business_id:str="105726822204079"):
+    api = WhatsappApiBulk(business_id,file)
+    response = api.message()
+    return response
 
 #telegram bot
 @app.post("/sendTelMessage/")

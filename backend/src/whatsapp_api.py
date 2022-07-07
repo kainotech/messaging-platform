@@ -1,10 +1,17 @@
 import os
 import json
 import requests
+import shutil
+import pandas as pd
+import asyncio
+import aiohttp
+import nest_asyncio
+nest_asyncio.apply()
 
 # 94741878798
 # 0705815179
-
+# permant token
+# EAAGpo6XqllQBAKZBGQduzPYdTMXfjud0heowF91hRNyfUNwIwZA5JsMr0B4GWCgheTeuAdoqExSlCQ1zkbv4PDTyR8BFd8ZAZAZBTMaAP5UIz7DVl50MRh6dlkpxfFE2D5IYxKsi530Kofe7IpS3hjKZARLmjufZCrH24TwYXBPaNvAtnoHjl7P
 class WhatsappApi():
     class_name = os.path.basename(__file__)
 
@@ -14,7 +21,7 @@ class WhatsappApi():
         self.session = requests.Session()
         self.req_headers = {
             "content-type": "application/json",
-            "Authorization":"Bearer EAAGpo6XqllQBABCigcEGvVUamLqBtpxATnTIL0fS3axFGIHKTgJCh0moGZAZCbP0ZB2LIsPZCxHnhJ7Ydl7yRC3ZBmV3oGjWbnAsbTVTNRI5HqYOislS6v2TP7EzosfeZAyRJ1545dsxblQdCu5lySjsW1RkrZCljMCkZAjgRExuqOlvoeqKYcuvxBGWEYN3ZBh1u8HSOqGmjBQZDZD",
+            "Authorization":"Bearer EAAGpo6XqllQBAKZBGQduzPYdTMXfjud0heowF91hRNyfUNwIwZA5JsMr0B4GWCgheTeuAdoqExSlCQ1zkbv4PDTyR8BFd8ZAZAZBTMaAP5UIz7DVl50MRh6dlkpxfFE2D5IYxKsi530Kofe7IpS3hjKZARLmjufZCrH24TwYXBPaNvAtnoHjl7P",
         }
         self.session.headers.update(self.req_headers)
         self.req_body = self._make_body_params(number)        
@@ -61,3 +68,88 @@ class WhatsappApi():
     def message(self):
         res = self.send() 
         return res
+
+
+
+
+class WhatsappApiBulk():
+    class_name = os.path.basename(__file__)
+    def __init__(self,business_id:str,file) -> None:
+        dir()
+        self.number_list = self.get_number_list(file)
+        self.BASE_URL = f"https://graph.facebook.com/v13.0/{business_id}/messages"
+        self.results = []
+
+    #temp locations
+    def dir(self):
+        temp="temp/"
+        os.makedirs(temp,exist_ok=True)
+
+
+    def get_number_list(self,file):
+        self.dir()
+        #need to change all things to src
+        file_location = f"temp/{file.filename}"
+
+        with open(file_location, "wb+") as file_object:
+            shutil.copyfileobj(file.file, file_object)  
+
+        df = pd.read_csv(file_location)
+        df["numbers"]  = df["numbers"].astype(str)
+        print(df)
+        numbers = df["numbers"].tolist()
+
+        shutil.rmtree("temp")
+        return numbers
+
+
+    def get_tasks(self,session,number_list):
+        tasks = []
+        for number in number_list:
+            tasks.append(asyncio.create_task(session.post(
+            url=self.BASE_URL, 
+            headers={
+                "content-type": "application/json",
+                "Authorization":"Bearer EAAGpo6XqllQBAKZBGQduzPYdTMXfjud0heowF91hRNyfUNwIwZA5JsMr0B4GWCgheTeuAdoqExSlCQ1zkbv4PDTyR8BFd8ZAZAZBTMaAP5UIz7DVl50MRh6dlkpxfFE2D5IYxKsi530Kofe7IpS3hjKZARLmjufZCrH24TwYXBPaNvAtnoHjl7P",
+            },
+            json={
+                "messaging_product": "whatsapp",
+                "to": number,
+                "type": "template",
+                "template": {
+                "name": "sample_shipping_confirmation",
+                "language": {
+                    "code": "en_US",
+                    "policy": "deterministic"
+                },
+                "components": [
+                    {
+                    "type": "body",
+                    "parameters": [
+                            {
+                            "type": "text",
+                            "text": "2"
+                            }
+                        ]
+                        }
+                    ]
+                    }
+                },
+            ssl=False)))
+        return tasks
+
+
+    async def get_symbols(self,number_list):
+        async with aiohttp.ClientSession() as session:
+            tasks = self.get_tasks(session,number_list)
+            responses = await asyncio.gather(*tasks)
+            for response in responses:
+                self.results.append(await response.text())
+
+
+    def message(self):
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.get_symbols(self.number_list))
+        print(f"{len(self.number_list)} api calls sent")  
+        # loop.close()
