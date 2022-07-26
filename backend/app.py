@@ -2,35 +2,70 @@ import streamlit as st
 import requests
 import json
 
-dialog_sms_url ="http://127.0.0.1:8000/sendMessageDialog"
+dialog_sms_url ="http://127.0.0.1:8000/sendMessageDialog/"
 
 def dialogSms():
-    st.markdown("# Dialog SMS")
+    st.markdown("# SMS")
     txt_message=st.text_input("Message")
-    btn_dialog_sms=st.button("Dialog SMS")
+    number=st.text_input("Number")
+    btn_dialog_sms=st.button("Send")
 
     if btn_dialog_sms:
         session = requests.Session()
         try:
-            data ={
-                    "message":txt_message
-                }
-            result = session.post(dialog_sms_url)
-            st.write(result)
+            headers = {
+                'accept': 'application/json',
+                'content-type': 'application/x-www-form-urlencoded',
+            }
+
+            params = {
+                'number':  number,
+                'message': txt_message,
+            }
+
+            response = session.post(dialog_sms_url, params=params, headers=headers)
+            st.write(response)
+            st.write(response.text)
         except Exception:
             st.write("Error")
     
 
-def mobitelSms():
-    st.markdown("# Mobitel SMS")
+def dialogSmsBulk():
+    st.markdown("# SMS Bulk")
+    txt_message=st.text_input("Message")
+    file=st.file_uploader("Upload Number List","csv")
+    btn_dialog_sms=st.button("Send")
+
+    if btn_dialog_sms:
+        session = requests.Session()
+        try:
+            headers = {
+                'accept': 'application/json',
+                # requests won't add a boundary if this header is set when you pass files=
+                # 'Content-Type': 'multipart/form-data',
+            }
+
+            params = {
+                'message': txt_message,
+            }
+
+            files = {
+                'file': file,
+            }
+
+            response = session.post('http://127.0.0.1:8000/sendBulkDialog', params=params, headers=headers, files=files)
+            st.write(response)
+            st.write(response.text)
+        except Exception:
+            st.write("Error")
 
 def whatsapp():
     st.markdown("# Whatsapp")
 
 
 page_names_to_funcs = {
-    "Dialog SMS": dialogSms,
-    "Mobitel SMS": mobitelSms,
+    "SMS": dialogSms,
+    "SMS Bulk": dialogSmsBulk,
     "Whatsapp": whatsapp,
 }
 
