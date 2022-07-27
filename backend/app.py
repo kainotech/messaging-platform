@@ -37,7 +37,6 @@ def dialogSmsBulk():
     txt_message=st.text_area("Message")
     file=st.file_uploader("Upload Number List","csv")
     btn_dialog_sms=st.button("Send")
-    st.write(mask)
    
     if btn_dialog_sms:
         session = requests.Session()
