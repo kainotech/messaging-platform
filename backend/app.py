@@ -6,7 +6,8 @@ dialog_sms_url ="http://127.0.0.1:8000/sendMessageDialog/"
 
 def dialogSms():
     st.markdown("# SMS")
-    txt_message=st.text_input("Message")
+    mask = st.selectbox('Select Your Mask ?',('kainovation', 'Data.io'))
+    txt_message=st.text_area("Message")
     number=st.text_input("Number")
     btn_dialog_sms=st.button("Send")
 
@@ -32,10 +33,12 @@ def dialogSms():
 
 def dialogSmsBulk():
     st.markdown("# SMS Bulk")
-    txt_message=st.text_input("Message")
+    mask = st.selectbox('Select Your Mask ?',('kainovation', 'Data.io'))
+    txt_message=st.text_area("Message")
     file=st.file_uploader("Upload Number List","csv")
     btn_dialog_sms=st.button("Send")
-
+    st.write(mask)
+   
     if btn_dialog_sms:
         session = requests.Session()
         try:
