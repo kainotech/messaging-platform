@@ -11,7 +11,8 @@ nest_asyncio.apply()
 # 94741878798
 # 0705815179
 # permant token
-# EAAGpo6XqllQBAKZBGQduzPYdTMXfjud0heowF91hRNyfUNwIwZA5JsMr0B4GWCgheTeuAdoqExSlCQ1zkbv4PDTyR8BFd8ZAZAZBTMaAP5UIz7DVl50MRh6dlkpxfFE2D5IYxKsi530Kofe7IpS3hjKZARLmjufZCrH24TwYXBPaNvAtnoHjl7P
+# EAAGpo6XqllQBALdYqQKbo282lUIuZBjuL90jra8h04czFZBMZB2KYarWkzackAv3lyxmxvm3NwuFLId4RmLlhp0rJNIw4rexkV48AOUZBechyYatK6t14AEM9XoG98aylQSP4v0s8ZCDLBXPxbjKphtdWztlGPeCMFyZCm4UAh6WSaYcOX4rWTnweEIkMmSYEVQ62dRHyXAgZDZD
+token = "EAAGpo6XqllQBALdYqQKbo282lUIuZBjuL90jra8h04czFZBMZB2KYarWkzackAv3lyxmxvm3NwuFLId4RmLlhp0rJNIw4rexkV48AOUZBechyYatK6t14AEM9XoG98aylQSP4v0s8ZCDLBXPxbjKphtdWztlGPeCMFyZCm4UAh6WSaYcOX4rWTnweEIkMmSYEVQ62dRHyXAgZDZD"
 class WhatsappApi():
     class_name = os.path.basename(__file__)
 
@@ -21,7 +22,7 @@ class WhatsappApi():
         self.session = requests.Session()
         self.req_headers = {
             "content-type": "application/json",
-            "Authorization":"Bearer EAAGpo6XqllQBAKZBGQduzPYdTMXfjud0heowF91hRNyfUNwIwZA5JsMr0B4GWCgheTeuAdoqExSlCQ1zkbv4PDTyR8BFd8ZAZAZBTMaAP5UIz7DVl50MRh6dlkpxfFE2D5IYxKsi530Kofe7IpS3hjKZARLmjufZCrH24TwYXBPaNvAtnoHjl7P",
+            "Authorization":"Bearer "+token,
         }
         self.session.headers.update(self.req_headers)
         self.req_body = self._make_body_params(number)        
@@ -110,7 +111,7 @@ class WhatsappApiBulk():
             url=self.BASE_URL, 
             headers={
                 "content-type": "application/json",
-                "Authorization":"Bearer EAAGpo6XqllQBAKZBGQduzPYdTMXfjud0heowF91hRNyfUNwIwZA5JsMr0B4GWCgheTeuAdoqExSlCQ1zkbv4PDTyR8BFd8ZAZAZBTMaAP5UIz7DVl50MRh6dlkpxfFE2D5IYxKsi530Kofe7IpS3hjKZARLmjufZCrH24TwYXBPaNvAtnoHjl7P",
+                "Authorization":"Bearer "+token,
             },
             json={
                 "messaging_product": "whatsapp",
