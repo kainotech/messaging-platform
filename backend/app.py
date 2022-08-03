@@ -63,6 +63,29 @@ def dialogSmsBulk():
 
 def whatsapp():
     st.markdown("# Whatsapp")
+    file=st.file_uploader("Upload Number List","csv")
+    btn_dialog_sms=st.button("Send")
+   
+    if btn_dialog_sms:
+        try:
+            headers = {
+                'accept': 'application/json',
+                # requests won't add a boundary if this header is set when you pass files=
+                # 'Content-Type': 'multipart/form-data',
+            }
+
+            params = {
+                'business_id': '105726822204079',
+            }
+
+            files = {
+                'file': file,
+            }
+
+            response = requests.post('http://127.0.0.1:8000/sendWAMBulk', params=params, headers=headers, files=files)
+            st.write(response)
+        except Exception:
+            st.write("Error")
 
 
 page_names_to_funcs = {
